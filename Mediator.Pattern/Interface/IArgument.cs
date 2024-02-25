@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace Mediator.Pattern.Interface
 {
-    public interface IQuery
+    //public interface ICommand
+    //{
+    //}
+
+    public interface IArgument
     {
+
     }
+
+    public interface IArgument<TResult>
+    {
+
+    }
+
+ 
 }

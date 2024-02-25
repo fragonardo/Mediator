@@ -26,7 +26,7 @@ namespace Mediator.Console
             return new ServiceCollection()
                 .AddSingleton<IService, XmlService>()
                 .AddSingleton<IUI, UI.UI>()
-                .AddSingleton<IQueryHandler<GetPersonsFromXmlQuery, IList<Person>>, GetPersonsFromXmlHandler>()
+                .AddSingleton<IHandler<GetPersonsFromXmlQuery, IList<Person>>, GetPersonsFromXmlHandler>()
                 .AddSingleton<IMediator, Pattern.Implementation.Mediator>(provider =>
                 {
                     //var mediator = new Pattern.Implementation.Mediator();
@@ -39,7 +39,7 @@ namespace Mediator.Console
         private static IMediator RegisterHandlers(IServiceProvider provider)
         {
             IMediator mediator = new Pattern.Implementation.Mediator();
-            mediator.Register(provider.GetService<IQueryHandler<GetPersonsFromXmlQuery, IList<Person>>>());
+            mediator.Register(provider.GetService<IHandler<GetPersonsFromXmlQuery, IList<Person>>>());
             return mediator;
         }
     }

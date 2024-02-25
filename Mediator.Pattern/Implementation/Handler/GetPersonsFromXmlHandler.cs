@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Mediator.Pattern.Implementation.Handler
 {
-    public class GetPersonsFromXmlHandler : IQueryHandler<GetPersonsFromXmlQuery, IList<Person>>
+    public class GetPersonsFromXmlHandler : IHandler<GetPersonsFromXmlQuery, IList<Person>>
     {
         private readonly IService _service;
 

@@ -15,31 +15,33 @@ namespace Mediator.Pattern.Implementation
         {
             _handlersByType = new Dictionary<Type, IHandler>();
         }
-        public TResult Dispatch<TQuery, TResult>(TQuery query) where TQuery : IQuery
+
+        public TResult Dispatch<TArg, TResult>(TArg query) where TArg : IArgument<TResult>
         {
             if (_handlersByType.TryGetValue(query.GetType(), out var handler))
             {
-                return (handler as IQueryHandler<TQuery, TResult>).Handle(query);
+                return (handler as IHandler<TArg, TResult>).Handle(query);
             }
             return default(TResult);
         }
 
-        public void Dispatch<TCommand>(TCommand command) where TCommand : ICommand
+        public void Dispatch<TArg>(TArg command) where TArg : IArgument
         {
             if(_handlersByType.TryGetValue(command.GetType(), out var handler))
             {
-                (handler as ICommandHandler<TCommand>).Handle(command);
+                (handler as IHandler<TArg>).Handle(command);
             }
         }
 
-        public void Register<TQuery, TResult>(IQueryHandler<TQuery, TResult> handler) where TQuery : IQuery
+        public void Register<TArg, TResult>(IHandler<TArg, TResult> handler) where TArg : IArgument<TResult>
         {
-            _handlersByType[typeof(TQuery)] = handler;
+            _handlersByType[typeof(TArg)] = handler;
         }
 
-        public void Register<TCommand>(ICommandHandler<TCommand> handler) where TCommand : ICommand
+        public void Register<TArg>(IHandler<TArg> handler) where TArg : IArgument
         {
-            _handlersByType[typeof(TCommand)] = handler;
+            _handlersByType[typeof(TArg)] = handler;
         }
+
     }
 }

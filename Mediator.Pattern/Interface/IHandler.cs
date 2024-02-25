@@ -10,4 +10,14 @@ namespace Mediator.Pattern.Interface
     {
 
     }
+
+    public interface IHandler<TArg> : IHandler where TArg : IArgument
+    {
+        void Handle(TArg command);
+    }
+
+    public interface IHandler<TArg, TResult> : IHandler where TArg : IArgument<TResult>
+    {
+        TResult Handle(TArg command);
+    }
 }
